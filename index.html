@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Демо-сайты для Братска</title>
+<meta name="description" content="Три демо-сайта для малого бизнеса Братска: цветы, кофейня и гостевой дом. Открываются с телефона, без установки.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23121814'/%3E%3Ctext x='32' y='44' font-family='Georgia,serif' font-size='34' fill='%23E9B44C' text-anchor='middle'%3EД%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="assets/fonts/fonts.css">
+<style>
+  :root{
+    --bg:#121814;
+    --panel:#1B241E;
+    --text:#F2EDE3;
+    --muted:#9AA69B;
+    --line:rgba(242,237,227,.14);
+    --accent:#E9B44C;
+    --serif:'Lora',Georgia,serif;
+    --sans:'Golos Text',system-ui,-apple-system,'Segoe UI',sans-serif;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--text);font-family:var(--sans);font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased}
+  img{display:block;max-width:100%}
+  a{color:inherit;text-decoration:none}
+  .wrap{width:min(1180px,calc(100% - 48px));margin:0 auto}
+  .header{border-bottom:1px solid var(--line)}
+  .header-in{display:flex;align-items:center;justify-content:space-between;gap:24px;height:72px}
+  .brand{display:flex;align-items:baseline;gap:10px}
+  .brand b{font-family:var(--serif);font-size:22px;font-weight:600;letter-spacing:.01em}
+  .brand span{font-size:10.5px;color:var(--muted)}
+  .header-link{font-size:13px;border-bottom:1px solid rgba(242,237,227,.3);padding-bottom:2px}
+  .header-link:hover{border-color:var(--accent);color:var(--accent)}
+  .hero{padding:74px 0 60px}
+  .kicker{font-size:11.5px;color:var(--accent);letter-spacing:.09em;margin-bottom:18px}
+  h1{font-family:var(--serif);font-weight:500;font-size:clamp(40px,5.4vw,72px);line-height:1.04;letter-spacing:-.02em;margin:0 0 22px;max-width:900px}
+  .hero p{max-width:560px;color:var(--muted);font-size:16px;margin:0}
+  .hero-actions{display:flex;flex-wrap:wrap;gap:14px;margin-top:30px}
+  .btn{display:inline-flex;align-items:center;justify-content:center;padding:14px 22px;border:1px solid transparent;font-size:13.5px;font-weight:600;border-radius:2px;transition:background .2s,color .2s,border-color .2s}
+  .btn-accent{background:var(--accent);color:#121814}
+  .btn-accent:hover{background:#f0c264}
+  .btn-line{border-color:var(--line);color:var(--text)}
+  .btn-line:hover{border-color:var(--text)}
+  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;padding:20px 0 80px}
+  .card{background:var(--panel);border:1px solid var(--line);display:flex;flex-direction:column}
+  .card-img{overflow:hidden;background:#0D120F;aspect-ratio:16/10}
+  .card-img img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+  .card:hover .card-img img{transform:scale(1.03)}
+  .card-body{padding:22px 22px 24px;display:flex;flex-direction:column;flex:1}
+  .card-label{font-size:10.5px;color:var(--accent);letter-spacing:.08em;margin-bottom:8px}
+  .card h2{font-family:var(--serif);font-size:26px;font-weight:600;line-height:1.15;margin:0 0 8px}
+  .card p{font-size:13px;color:var(--muted);margin:0 0 20px;line-height:1.55}
+  .card-links{margin-top:auto;display:flex;align-items:center;justify-content:space-between;gap:12px;border-top:1px solid var(--line);padding-top:14px}
+  .open{font-size:13px;font-weight:600;border-bottom:1px solid var(--text);padding-bottom:2px}
+  .open:hover{color:var(--accent);border-color:var(--accent)}
+  .personal{font-size:11px;color:var(--muted);border-bottom:1px solid rgba(242,237,227,.22);padding-bottom:1px}
+  .personal:hover{color:var(--text)}
+  .how{border-top:1px solid var(--line);padding:64px 0 76px}
+  .how h2{font-family:var(--serif);font-size:clamp(30px,3.4vw,42px);font-weight:500;margin:0 0 30px}
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:34px}
+  .step{border-top:1px solid var(--line);padding-top:16px}
+  .step b{display:block;font-size:11px;color:var(--accent);font-weight:600;margin-bottom:8px}
+  .step h3{font-size:15.5px;font-weight:600;margin:0 0 6px}
+  .step p{font-size:13px;color:var(--muted);margin:0}
+  .footer{border-top:1px solid var(--line);padding:28px 0 34px;font-size:11.5px;color:rgba(242,237,227,.45);display:flex;justify-content:space-between;gap:20px}
+  .footer a{border-bottom:1px solid rgba(242,237,227,.25)}
+  @media (max-width:980px){
+    .cards{grid-template-columns:1fr 1fr}
+    .steps{grid-template-columns:1fr}
+    .step{max-width:520px}
+  }
+  @media (max-width:680px){
+    .wrap{width:calc(100% - 32px)}
+    .header-in{height:62px}
+    .brand b{font-size:19px}
+    .brand span{display:none}
+    .hero{padding:44px 0 36px}
+    h1{font-size:clamp(34px,10vw,46px)}
+    .hero p{font-size:14px}
+    .hero-actions .btn{flex:1 1 auto}
+    .cards{grid-template-columns:1fr;gap:16px;padding-bottom:54px}
+    .card h2{font-size:24px}
+    .how{padding:44px 0 54px}
+    .footer{flex-direction:column;gap:8px}
+  }
+  :focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="wrap header-in">
+    <a class="brand" href="./"><b>Демо-сайты</b><span>для Братска</span></a>
+    <a class="header-link" href="builder.html">Собрать ссылку</a>
+  </div>
+</header>
+
+<main>
+  <section class="wrap hero">
+    <div class="kicker">3 готовых примера</div>
+    <h1>Три сайта, которые можно показать клиенту</h1>
+    <p>Цветы, кофейня и гостевой дом. Все страницы адаптированы под телефон, открываются по ссылке и не требуют установки. В ссылку можно подставить название и телефон клиента.</p>
+    <div class="hero-actions">
+      <a class="btn btn-accent" href="builder.html">Сделать персональную ссылку</a>
+      <a class="btn btn-line" href="#demos">Смотреть демо</a>
+    </div>
+  </section>
+
+  <section class="wrap cards" id="demos">
+    <article class="card">
+      <div class="card-img"><img src="assets/img/flowers/hero.jpg" alt="Демо сайта цветочного салона" width="1200" height="1600"></div>
+      <div class="card-body">
+        <div class="card-label">Цветы</div>
+        <h2>Пион</h2>
+        <p>Каталог букетов с ценами, доставка, отзывы и кнопка заказа в WhatsApp. Светлый редакционный стиль.</p>
+        <div class="card-links"><a class="open" href="flowers/">Открыть демо</a><a class="personal" href="builder.html?t=flowers">С названием клиента</a></div>
+      </div>
+    </article>
+    <article class="card">
+      <div class="card-img"><img src="assets/img/cafe/latte.jpg" alt="Демо сайта кофейни" width="1200" height="960" style="object-position:55% 62%"></div>
+      <div class="card-body">
+        <div class="card-label">Кофейня</div>
+        <h2>Тёплый хлеб</h2>
+        <p>Меню с ценами, фото зала, бронь столика через WhatsApp. Тёмный контрастный стиль с крупной типографикой.</p>
+        <div class="card-links"><a class="open" href="cafe/">Открыть демо</a><a class="personal" href="builder.html?t=cafe">С названием клиента</a></div>
+      </div>
+    </article>
+    <article class="card">
+      <div class="card-img"><img src="assets/img/hotel/hero.jpg" alt="Демо сайта гостевого дома" width="1200" height="800"></div>
+      <div class="card-body">
+        <div class="card-label">Гостевой дом</div>
+        <h2>Таёжный берег</h2>
+        <p>Номера и цены, баня, галерея с лайтбоксом и форма брони. Спокойный природный стиль.</p>
+        <div class="card-links"><a class="open" href="hotel/">Открыть демо</a><a class="personal" href="builder.html?t=hotel">С названием клиента</a></div>
+      </div>
+    </article>
+  </section>
+
+  <section class="how">
+    <div class="wrap">
+      <h2>Как пользоваться</h2>
+      <div class="steps">
+        <div class="step"><b>01</b><h3>Откройте с телефона</h3><p>Проверьте, как страница выглядит на вашем экране. Все кнопки звонка и WhatsApp работают.</p></div>
+        <div class="step"><b>02</b><h3>Подставьте клиента</h3><p>Введите название и телефон в генераторе — ссылка изменится, а на сайте появятся его данные.</p></div>
+        <div class="step"><b>03</b><h3>Отправьте в WhatsApp</h3><p>Скопируйте готовое сообщение вместе со ссылкой. Клиент откроет демо без установки и регистрации.</p></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer wrap">
+  <span>Демо-версии для показа клиентам. Данные организаций не опубликованы.</span>
+  <span><a href="credits.html">Фотографии и лицензии</a></span>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,508 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Тёплый хлеб — кофейня и пекарня в Братске</title>
+<meta name="description" content="Кофейня и пекарня в Братске: своя обжарка, свежая выпечка каждое утро, завтраки до полудня. Бронь столика в WhatsApp.">
+<meta property="og:title" content="Тёплый хлеб — кофейня и пекарня в Братске">
+<meta property="og:description" content="Завтраки до полудня, кофе весь день. Своя обжарка и выпечка с шести утра.">
+<meta property="og:image" content="../assets/img/cafe/hero.jpg">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%231B1714'/%3E%3Ctext x='32' y='45' font-family='Arial,sans-serif' font-weight='bold' font-size='34' fill='%23E9B44C' text-anchor='middle'%3EТ%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="../assets/fonts/fonts.css">
+<style>
+  :root{
+    --espresso:#1B1714;
+    --espresso-2:#241E1A;
+    --milk:#F4EDE1;
+    --butter:#E9B44C;
+    --brick:#B94A36;
+    --ink:#221D19;
+    --muted:#8C8177;
+    --line:rgba(244,237,225,.16);
+    --display:'Unbounded',system-ui,sans-serif;
+    --body:'Manrope',system-ui,-apple-system,'Segoe UI',sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--espresso);color:var(--milk);font-family:var(--body);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+  body.locked{overflow:hidden}
+  img{display:block;max-width:100%}
+  a{color:inherit;text-decoration:none}
+  button{font:inherit;color:inherit}
+  .wrap{width:min(1200px,calc(100% - 48px));margin:0 auto}
+  [id]{scroll-margin-top:92px}
+  .demo-strip{background:var(--butter);color:var(--espresso);text-align:center;font-size:11.5px;line-height:1.4;padding:8px 16px}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:15px 24px;border:1px solid transparent;font-size:14px;font-weight:700;cursor:pointer;border-radius:3px;transition:background .2s,color .2s,border-color .2s}
+  .btn-butter{background:var(--butter);color:var(--espresso)}
+  .btn-butter:hover{background:#f1c264}
+  .btn-outline{border-color:rgba(244,237,225,.5);color:var(--milk)}
+  .btn-outline:hover{border-color:var(--milk);background:rgba(244,237,225,.08)}
+  .btn-dark{background:var(--espresso);color:var(--milk)}
+  .btn-dark:hover{background:#000}
+
+  /* header */
+  .header{position:sticky;top:0;z-index:60;background:var(--espresso);border-bottom:1px solid var(--line)}
+  .header-in{display:flex;align-items:center;gap:34px;height:78px}
+  .brand{display:flex;align-items:baseline;gap:12px;min-width:0}
+  .brand-name{font-family:var(--display);font-size:20px;font-weight:600;letter-spacing:-.02em;line-height:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .brand-sub{font-size:10.5px;color:var(--muted);letter-spacing:.04em;white-space:nowrap}
+  .nav{display:flex;gap:24px;margin-left:auto}
+  .nav a{font-size:13px;color:rgba(244,237,225,.78);padding:4px 0;border-bottom:1px solid transparent}
+  .nav a:hover{color:var(--milk);border-color:var(--butter)}
+  .header-actions{display:flex;align-items:center;gap:18px}
+  .header-phone{font-size:13.5px;font-weight:700;white-space:nowrap}
+  .header-actions .btn{padding:12px 18px}
+  .burger{display:none;margin-left:auto;width:42px;height:42px;border:1px solid var(--line);background:transparent;position:relative;cursor:pointer}
+  .burger span{position:absolute;left:11px;right:11px;height:1.5px;background:var(--milk);transition:transform .25s,opacity .25s}
+  .burger span:nth-child(1){top:16px}
+  .burger span:nth-child(2){bottom:16px}
+
+  /* hero */
+  .hero{background:var(--espresso);padding:70px 0 78px}
+  .hero-grid{display:grid;grid-template-columns:1.02fr .98fr;gap:64px;align-items:center}
+  .kicker{display:inline-block;font-size:12.5px;font-weight:700;color:var(--butter);border-bottom:1px solid rgba(233,180,76,.45);padding-bottom:5px}
+  h1{font-family:var(--display);font-weight:500;font-size:clamp(34px,4.35vw,62px);line-height:1.04;letter-spacing:-.03em;margin:22px 0 24px}
+  .hero-copy p{max-width:480px;color:rgba(244,237,225,.7);font-size:16px;margin:0}
+  .hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
+  .hero-note{margin-top:36px;font-size:12.5px;color:var(--muted);letter-spacing:.02em}
+  .hero-visual{position:relative}
+  .hero-frame{position:relative;padding:12px;border:1px solid rgba(233,180,76,.55)}
+  .hero-shot{width:100%;height:560px;object-fit:cover;object-position:50% 48%}
+  .hero-caption{position:absolute;right:-1px;bottom:-1px;background:var(--butter);color:var(--espresso);font-size:11.5px;font-weight:700;padding:9px 13px}
+
+  /* marquee-ish fact line */
+  .facts{border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .facts-grid{display:grid;grid-template-columns:repeat(4,1fr)}
+  .fact{padding:20px 26px;border-left:1px solid var(--line);font-size:12px;color:rgba(244,237,225,.62)}
+  .fact:first-child{border-left:0;padding-left:0}
+  .fact b{display:block;color:var(--milk);font-size:13px;font-weight:700;margin-bottom:2px}
+
+  /* menu */
+  .menu-section{background:var(--milk);color:var(--ink);padding:96px 0}
+  .section-head{display:flex;align-items:flex-end;justify-content:space-between;gap:40px;border-bottom:1px solid rgba(34,29,25,.16);padding-bottom:22px;margin-bottom:44px}
+  .section-head h2{font-family:var(--display);font-weight:500;font-size:clamp(38px,4.2vw,56px);line-height:1;letter-spacing:-.03em;margin:0}
+  .section-head p{max-width:360px;margin:0;font-size:13.5px;color:#75695f}
+  .menu-cols{display:grid;grid-template-columns:1fr 1fr;gap:0 72px}
+  .menu-col h3{font-family:var(--display);font-size:13px;font-weight:600;letter-spacing:.02em;margin:0 0 18px;color:var(--brick)}
+  .menu-item{display:flex;align-items:baseline;gap:10px;padding:13px 0;border-bottom:1px solid rgba(34,29,25,.12)}
+  .menu-item:last-child{border-bottom:0}
+  .menu-item .info{min-width:0}
+  .menu-item .name{font-size:15.5px;font-weight:700;line-height:1.35}
+  .menu-item .desc{font-size:12px;color:#75695f;line-height:1.45;margin-top:2px}
+  .dots{flex:1;border-bottom:1px dotted rgba(34,29,25,.28);transform:translateY(-4px);min-width:18px}
+  .menu-item .cost{font-size:14px;font-weight:700;white-space:nowrap}
+  .menu-note{margin-top:30px;font-size:12px;color:#75695f}
+
+  /* photo strip */
+  .strip{background:var(--milk);padding:0 0 96px}
+  .strip-grid{display:grid;grid-template-columns:1.2fr .9fr .9fr;gap:16px}
+  .strip figure{margin:0;position:relative}
+  .strip img{width:100%;height:330px;object-fit:cover}
+  .strip figcaption{font-size:11.5px;color:#75695f;padding-top:8px}
+
+  /* about */
+  .about{background:var(--espresso-2);padding:96px 0}
+  .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:center}
+  .about img{width:100%;height:520px;object-fit:cover}
+  .about h2{font-family:var(--display);font-weight:500;font-size:clamp(32px,3.6vw,48px);line-height:1.08;letter-spacing:-.03em;margin:0 0 22px}
+  .about p{color:rgba(244,237,225,.68);font-size:15px;margin:0 0 16px;max-width:480px}
+  .about-list{display:grid;grid-template-columns:1fr 1fr;gap:18px 24px;margin-top:30px}
+  .about-list div{border-top:1px solid var(--line);padding-top:12px;font-size:12.5px;color:rgba(244,237,225,.62)}
+  .about-list b{display:block;color:var(--milk);font-size:13.5px;margin-bottom:2px}
+
+  /* booking */
+  .booking{background:var(--brick);padding:88px 0}
+  .booking-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:70px;align-items:start}
+  .booking h2{font-family:var(--display);font-weight:500;font-size:clamp(32px,3.6vw,48px);line-height:1.08;letter-spacing:-.03em;margin:0 0 16px}
+  .booking p{color:rgba(255,255,255,.78);font-size:14px;max-width:380px;margin:0}
+  .booking-note{margin-top:28px;font-size:12px;color:rgba(255,255,255,.62);line-height:1.6;max-width:320px}
+  .booking-note a{white-space:nowrap}
+  .form{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .field{display:flex;flex-direction:column;gap:6px}
+  .field.full{grid-column:1/-1}
+  .field label{font-size:11px;color:rgba(255,255,255,.72)}
+  .field input,.field select{width:100%;background:rgba(0,0,0,.12);border:1px solid rgba(255,255,255,.34);color:#fff;padding:12px 13px;font-size:14px;border-radius:3px;outline:none}
+  .field input:focus,.field select:focus{border-color:#fff}
+  .field input::placeholder{color:rgba(255,255,255,.5)}
+  .form .btn{grid-column:1/-1;margin-top:4px;width:100%}
+  .form-status{grid-column:1/-1;font-size:11.5px;color:rgba(255,255,255,.7);margin:0}
+
+  /* reviews */
+  .reviews{background:var(--milk);color:var(--ink);padding:92px 0}
+  .reviews .section-head{border-color:rgba(34,29,25,.16)}
+  .review-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0}
+  .review{padding:0 34px;border-left:1px solid rgba(34,29,25,.14)}
+  .review:first-child{padding-left:0;border-left:0}
+  .review:last-child{padding-right:0}
+  .review p{font-size:14px;color:#5f554d;line-height:1.65;margin:0 0 16px}
+  .review b{font-size:12.5px}
+
+  /* contacts */
+  .contacts{position:relative;background:var(--espresso)}
+  .contacts-img{width:100%;height:560px;object-fit:cover;opacity:.5}
+  .contacts-card{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:min(560px,calc(100% - 48px));background:var(--milk);color:var(--ink);padding:38px 40px}
+  .contacts-card h2{font-family:var(--display);font-size:30px;font-weight:500;letter-spacing:-.03em;margin:0 0 20px}
+  .contacts-list{display:grid;grid-template-columns:1fr 1fr;gap:18px 24px;margin:0}
+  .contacts-list dt{font-size:11px;color:#75695f;margin-bottom:3px}
+  .contacts-list dd{margin:0;font-size:14.5px;line-height:1.5}
+  .contacts-list a{border-bottom:1px solid rgba(34,29,25,.2)}
+  .contacts-card .btn{margin-top:24px}
+  .contacts-card .map-link{display:inline-block;margin-top:18px;font-size:12px;border-bottom:1px solid var(--ink)}
+
+  /* footer */
+  .footer{background:var(--espresso);border-top:1px solid var(--line);padding:46px 0 28px}
+  .footer-top{display:flex;justify-content:space-between;gap:40px;padding-bottom:30px;border-bottom:1px solid var(--line)}
+  .footer .brand-name{font-size:22px}
+  .footer-cols{display:flex;gap:60px;font-size:12.5px;color:rgba(244,237,225,.55);line-height:1.8}
+  .footer-cols b{display:block;color:var(--milk);font-weight:700;margin-bottom:5px}
+  .footer-bottom{display:flex;justify-content:space-between;gap:24px;padding-top:20px;font-size:11px;color:rgba(244,237,225,.4)}
+  .footer-bottom a{border-bottom:1px solid rgba(244,237,225,.25)}
+
+  .mobile-bar{display:none}
+  .mobile-menu{position:fixed;inset:0;z-index:100;background:var(--espresso);padding:24px;display:none;flex-direction:column}
+  .mobile-menu.open{display:flex}
+  .mobile-menu-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:30px}
+  .mobile-menu .close{width:44px;height:44px;border:1px solid var(--line);background:transparent;font-size:26px;line-height:1;cursor:pointer;color:var(--milk)}
+  .mobile-menu nav{display:flex;flex-direction:column}
+  .mobile-menu nav a{font-family:var(--display);font-size:26px;line-height:1.3;border-bottom:1px solid var(--line);padding:14px 0}
+  .mobile-menu-foot{margin-top:auto;display:flex;flex-direction:column;gap:8px;font-size:13px;color:var(--muted)}
+  .mobile-menu-foot a{color:var(--milk);font-weight:700}
+
+  @media (max-width:1040px){
+    .nav{display:none}
+    .header-actions{margin-left:auto}
+    .burger{display:block}
+    .hero-grid{grid-template-columns:1fr;gap:44px}
+    .hero-copy{max-width:700px}
+    .hero-shot{height:480px}
+    .facts-grid{grid-template-columns:1fr 1fr}
+    .fact{padding:16px 20px}
+    .fact:nth-child(3){border-left:0;padding-left:0}
+    .menu-cols{grid-template-columns:1fr;gap:36px}
+    .strip-grid{grid-template-columns:1fr 1fr}
+    .strip figure:first-child{grid-column:1/-1}
+    .strip img{height:300px}
+    .about-grid{grid-template-columns:1fr;gap:40px}
+    .about img{height:420px}
+    .booking-grid{grid-template-columns:1fr;gap:40px}
+    .review-grid{grid-template-columns:1fr;gap:22px}
+    .review{padding:0;border-left:0;border-top:1px solid rgba(34,29,25,.14);padding-top:18px}
+    .review:first-child{border-top:0;padding-top:0}
+  }
+  @media (max-width:720px){
+    .wrap{width:calc(100% - 32px)}
+    [id]{scroll-margin-top:80px}
+    .header-in{height:66px;gap:10px}
+    .brand-name{font-size:17px;max-width:62vw}
+    .brand-sub{display:none}
+    .header-actions .header-phone,.header-actions .btn{display:none}
+    .header-actions{margin-left:auto}
+    .hero{padding:38px 0 52px}
+    h1{font-size:clamp(32px,9.6vw,44px);margin:18px 0 18px}
+    .hero-copy p{font-size:14.5px}
+    .hero-actions .btn{flex:1 1 auto}
+    .hero-note{font-size:11.5px;margin-top:26px}
+    .hero-frame{padding:8px}
+    .hero-shot{height:390px}
+    .facts-grid{grid-template-columns:1fr 1fr}
+    .fact{font-size:11px;padding:13px 12px}
+    .fact b{font-size:12px}
+    .menu-section{padding:58px 0}
+    .section-head{flex-direction:column;align-items:flex-start;gap:10px;padding-bottom:16px;margin-bottom:26px}
+    .section-head h2{font-size:38px}
+    .menu-item{padding:12px 0}
+    .menu-item .name{font-size:14.5px}
+    .strip{padding-bottom:58px}
+    .strip-grid{grid-template-columns:1fr 1fr;gap:10px}
+    .strip figure:first-child{grid-column:1/-1}
+    .strip img{height:220px}
+    .about{padding:58px 0}
+    .about img{height:300px}
+    .about-list{gap:14px}
+    .booking{padding:58px 0}
+    .form{grid-template-columns:1fr}
+    .form .btn{grid-column:1/-1}
+    .reviews{padding:58px 0}
+    .contacts-img{height:700px;object-position:60% 50%}
+    .contacts-card{position:relative;left:auto;top:auto;transform:none;width:calc(100% - 32px);margin:-160px auto 0;padding:26px 22px}
+    .contacts-list{grid-template-columns:1fr 1fr;gap:16px}
+    .footer{padding:38px 0 90px}
+    .footer-top{flex-direction:column;gap:22px}
+    .footer-cols{flex-wrap:wrap;gap:26px}
+    .footer-bottom{flex-direction:column;gap:6px}
+    .mobile-bar{display:grid;grid-template-columns:1fr 1fr;position:fixed;left:0;right:0;bottom:0;z-index:80;border-top:1px solid var(--line);background:var(--espresso)}
+    .mobile-bar a{display:flex;align-items:center;justify-content:center;height:58px;font-size:13.5px;font-weight:700}
+    .mobile-bar a:first-child{background:var(--butter);color:var(--espresso)}
+    .mobile-bar a:last-child{border-left:1px solid var(--line)}
+  }
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+  :focus-visible{outline:2px solid var(--butter);outline-offset:3px}
+</style>
+</head>
+<body>
+
+<div class="demo-strip">Демо-версия сайта. Пример оформления, а не действующая кофейня.</div>
+
+<header class="header">
+  <div class="wrap header-in">
+    <a class="brand" href="#top">
+      <span class="brand-name" data-brand>Тёплый хлеб</span>
+      <span class="brand-sub">кофейня и пекарня · Братск</span>
+    </a>
+    <nav class="nav" aria-label="Основная навигация">
+      <a href="#menu">Меню</a>
+      <a href="#about">О нас</a>
+      <a href="#booking">Бронь</a>
+      <a href="#contacts">Контакты</a>
+    </nav>
+    <div class="header-actions">
+      <a class="header-phone" href="tel:+73953000000" data-phone>+7 (3953) 00-00-00</a>
+      <a class="btn btn-butter" href="#booking">Забронировать</a>
+      <button class="burger" id="burger" aria-label="Открыть меню" aria-expanded="false"><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <span class="kicker">Братск, ул. Мира, 32</span>
+        <h1>Завтраки до полудня. Кофе&nbsp;— весь день.</h1>
+        <p>Своя обжарка и выпечка с шести утра. Заходите за круассаном по дороге или бронируйте стол на вечер.</p>
+        <div class="hero-actions">
+          <a class="btn btn-butter" href="#menu">Смотреть меню</a>
+          <a class="btn btn-outline" href="#booking">Забронировать стол</a>
+        </div>
+        <div class="hero-note">Пн–Пт 8:00–22:00, Сб–Вс 9:00–23:00</div>
+      </div>
+      <div class="hero-visual">
+        <div class="hero-frame">
+          <img class="hero-shot" src="../assets/img/cafe/latte.jpg" alt="Капучино с рисунком на молоке" width="1200" height="960">
+          <span class="hero-caption">капучино · 220 ₽</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap facts">
+    <div class="facts-grid">
+      <div class="fact"><b>Своя обжарка</b>зерно каждую неделю</div>
+      <div class="fact"><b>Печём с 6 утра</b>круассаны и хлеб</div>
+      <div class="fact"><b>Завтраки до 12:00</b>сырники, омлет, каши</div>
+      <div class="fact"><b>12 мест</b>Wi-Fi и розетки</div>
+    </div>
+  </div>
+
+  <section class="menu-section" id="menu">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Меню</h2>
+        <p>Основное — ниже. Полное меню и сезонные позиции спрашивайте у бариста: обновляем каждую неделю.</p>
+      </div>
+      <div class="menu-cols">
+        <div class="menu-col">
+          <h3>Кофе</h3>
+          <div class="menu-item">
+            <div class="info"><div class="name">Капучино</div><div class="desc">двойной эспрессо, молоко 3,2%</div></div><span class="dots"></span><span class="cost">220 ₽</span>
+          </div>
+          <div class="menu-item">
+            <div class="info"><div class="name">Латте</div><div class="desc">мягкий, на выбор: классический или с сиропом</div></div><span class="dots"></span><span class="cost">240 ₽</span>
+          </div>
+          <div class="menu-item">
+            <div class="info"><div class="name">Фильтр</div><div class="desc">чёрный кофе, зерно дня</div></div><span class="dots"></span><span class="cost">190 ₽</span>
+          </div>
+          <div class="menu-item">
+            <div class="info"><div class="name">Матча-латте</div><div class="desc">церемониальная матча, молоко</div></div><span class="dots"></span><span class="cost">260 ₽</span>
+          </div>
+          <div class="menu-item">
+            <div class="info"><div class="name">Какао</div><div class="desc">тёмный шоколад, маршмеллоу</div></div><span class="dots"></span><span class="cost">210 ₽</span>
+          </div>
+        </div>
+        <div class="menu-col">
+          <h3>Кухня</h3>
+          <div class="menu-item">
+            <div class="info"><div class="name">Сырники</div><div class="desc">сметана, ягодный соус</div></div><span class="dots"></span><span class="cost">320 ₽</span>
+          </div>
+          <div class="menu-item">
+            <div class="info"><div class="name">Омлет</div><div class="desc">три яйца, томаты, зелень, тост</div></div><span class="dots"></span><span class="cost">290 ₽</span>
+          </div>
+          <div class="menu-item">
+            <div class="info"><div class="name">Круассан</div><div class="desc">классический или с миндальным кремом</div></div><span class="dots"></span><span class="cost">180 ₽</span>
+          </div>
+          <div class="menu-item">
+            <div class="info"><div class="name">Сэндвич с курицей</div><div class="desc">чиабатта, соус на йогурте</div></div><span class="dots"></span><span class="cost">280 ₽</span>
+          </div>
+          <div class="menu-item">
+            <div class="info"><div class="name">Чизкейк</div><div class="desc">классический, с ягодным соусом</div></div><span class="dots"></span><span class="cost">260 ₽</span>
+          </div>
+        </div>
+      </div>
+      <p class="menu-note">Завтраки подаём до 12:00. Можно взять с собой — стакан и крышка включены в цену.</p>
+    </div>
+  </section>
+
+  <div class="strip">
+    <div class="wrap strip-grid">
+      <figure><img src="../assets/img/cafe/croissant.jpg" alt="Свежий круассан" loading="lazy" width="1200" height="648"><figcaption>Круассаны печём два раза в день</figcaption></figure>
+      <figure><img src="../assets/img/cafe/interior.jpg" alt="Зал кофейни" loading="lazy" width="1200" height="950"><figcaption>Зал на 12 мест</figcaption></figure>
+      <figure><img src="../assets/img/cafe/matcha.jpg" alt="Матча-латте" loading="lazy" width="1200" height="675"><figcaption>Матча-латте · 260 ₽</figcaption></figure>
+    </div>
+  </div>
+
+  <section class="about" id="about">
+    <div class="wrap about-grid">
+      <img src="../assets/img/cafe/hall.jpg" alt="Интерьер кофейни с деревянными столами" loading="lazy" width="1200" height="900">
+      <div>
+        <h2>Обжариваем сами, печём с шести утра</h2>
+        <p>Начали с маленькой пекарни на Мира и остались там же. Зерно заказываем у знакомых обжарщиков, хлеб и круассаны делаем на месте — поэтому запах чувствуется с улицы.</p>
+        <p>Можно прийти с ноутбуком: есть розетки и Wi-Fi. Можно с ребёнком: есть детский стул и какао.</p>
+        <div class="about-list">
+          <div><b>12 мест</b>и два столика у окна</div>
+          <div><b>Wi-Fi</b>без пароля</div>
+          <div><b>С собой</b>своя кружка — скидка 20 ₽</div>
+          <div><b>Собаки</b>можно, мы не против</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="booking" id="booking">
+    <div class="wrap booking-grid">
+      <div>
+        <h2>Забронировать стол</h2>
+        <p>Оставьте имя, телефон и время — мы подтвердим бронь в WhatsApp. На выходные лучше писать за день.</p>
+        <p class="booking-note">Если стол нужен сегодня, позвоните: <a href="tel:+73953000000" data-phone style="border-bottom:1px solid rgba(255,255,255,.5)">+7 (3953) 00-00-00</a>. Так быстрее.</p>
+      </div>
+      <form class="form" id="bookingForm">
+        <div class="field"><label for="f-name">Имя</label><input id="f-name" name="name" type="text" placeholder="Как к вам обращаться" required></div>
+        <div class="field"><label for="f-phone">Телефон</label><input id="f-phone" name="phone" type="tel" placeholder="+7 ___ ___-__-__" required></div>
+        <div class="field"><label for="f-date">Дата</label><input id="f-date" name="date" type="date" required></div>
+        <div class="field"><label for="f-time">Время</label><input id="f-time" name="time" type="time" value="19:00" required></div>
+        <div class="field full"><label for="f-guests">Гостей</label>
+          <select id="f-guests" name="guests">
+            <option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>больше 6</option>
+          </select>
+        </div>
+        <button class="btn btn-butter" type="submit">Отправить в WhatsApp</button>
+        <p class="form-status">Откроется WhatsApp с готовым сообщением — останется нажать «Отправить».</p>
+      </form>
+    </div>
+  </section>
+
+  <section class="reviews" id="reviews">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Что говорят</h2>
+        <p>4,8 из 5 по отзывам в 2ГИС. Спасибо, что заходите.</p>
+      </div>
+      <div class="review-grid">
+        <div class="review"><p>Лучшие сырники в Центральном. Порции нормальные, кофе не горчит. По выходным лучше бронировать.</p><b>Ольга</b></div>
+        <div class="review"><p>Беру капучино каждое утро по дороге на работу. Бариста уже знают заказ, это приятно.</p><b>Алексей</b></div>
+        <div class="review"><p>Заходили с ноутбуком поработать: розетки есть, музыка не громкая, никто не торопит.</p><b>Ксения</b></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="contacts" id="contacts">
+    <img class="contacts-img" src="../assets/img/cafe/interior.jpg" alt="Интерьер кофейни" loading="lazy" width="1200" height="950">
+    <div class="contacts-card">
+      <h2>Как найти</h2>
+      <dl class="contacts-list">
+        <div><dt>Адрес</dt><dd>Братск, ул. Мира, 32<br>Центральный район</dd></div>
+        <div><dt>Часы</dt><dd>Пн–Пт 8:00–22:00<br>Сб–Вс 9:00–23:00</dd></div>
+        <div><dt>Телефон</dt><dd><a href="tel:+73953000000" data-phone>+7 (3953) 00-00-00</a></dd></div>
+        <div><dt>WhatsApp</dt><dd><a href="https://wa.me/73953000000" data-wa="Здравствуйте! Хочу забронировать стол." target="_blank" rel="noopener">написать</a></dd></div>
+      </dl>
+      <a class="btn btn-dark" href="https://yandex.ru/maps/?text=Братск%2C%20улица%20Мира%2C%2032" target="_blank" rel="noopener">Открыть в Яндекс Картах</a>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-top">
+      <a class="brand" href="#top"><span class="brand-name" data-brand>Тёплый хлеб</span></a>
+      <div class="footer-cols">
+        <div><b>Кофейня</b>ул. Мира, 32<br>Пн–Вс с 8:00</div>
+        <div><b>Связь</b><a href="tel:+73953000000" data-phone>+7 (3953) 00-00-00</a><br><a href="https://wa.me/73953000000" data-wa="Здравствуйте! Хочу забронировать стол." target="_blank" rel="noopener">WhatsApp</a></div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span data-year>2026</span> <span data-brand>Тёплый хлеб</span>. Демо-версия сайта.</span>
+      <span><a href="../credits.html">Фотографии</a></span>
+    </div>
+  </div>
+</footer>
+
+<div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+  <div class="mobile-menu-top">
+    <span class="brand-name" data-brand>Тёплый хлеб</span>
+    <button class="close" id="closeMenu" aria-label="Закрыть меню">×</button>
+  </div>
+  <nav>
+    <a href="#menu">Меню</a>
+    <a href="#about">О нас</a>
+    <a href="#booking">Бронь</a>
+    <a href="#contacts">Контакты</a>
+  </nav>
+  <div class="mobile-menu-foot">
+    <span>ул. Мира, 32 · Пн–Вс с 8:00</span>
+    <a href="tel:+73953000000" data-phone>+7 (3953) 00-00-00</a>
+    <a href="https://wa.me/73953000000" data-wa="Здравствуйте! Хочу забронировать стол." target="_blank" rel="noopener">Написать в WhatsApp</a>
+  </div>
+</div>
+
+<div class="mobile-bar">
+  <a href="#booking">Забронировать</a>
+  <a href="tel:+73953000000" data-phone-link>Позвонить</a>
+</div>
+
+<script>
+(function(){
+  var q = new URLSearchParams(location.search);
+  var name = q.get('name');
+  var phone = q.get('phone');
+  if(name){
+    document.querySelectorAll('[data-brand]').forEach(function(el){ el.textContent = name; });
+    document.title = name + ' — кофейня и пекарня в Братске';
+  }
+  var digits = '73953000000';
+  if(phone){
+    digits = phone.replace(/\D/g,'');
+    if(digits.length === 11 && digits[0] === '8') digits = '7' + digits.slice(1);
+    document.querySelectorAll('[data-phone]').forEach(function(el){ el.textContent = phone; });
+    document.querySelectorAll('a[href^="tel:"]').forEach(function(el){ el.href = 'tel:+' + digits; });
+    document.querySelectorAll('a[data-wa]').forEach(function(el){
+      el.href = 'https://wa.me/' + digits + '?text=' + encodeURIComponent(el.getAttribute('data-wa'));
+    });
+  }
+  document.querySelectorAll('[data-year]').forEach(function(el){ el.textContent = new Date().getFullYear(); });
+
+  var burger = document.getElementById('burger');
+  var menu = document.getElementById('mobileMenu');
+  var close = document.getElementById('closeMenu');
+  function openMenu(){ menu.classList.add('open'); menu.setAttribute('aria-hidden','false'); burger.setAttribute('aria-expanded','true'); document.body.classList.add('locked'); }
+  function closeMenu(){ menu.classList.remove('open'); menu.setAttribute('aria-hidden','true'); burger.setAttribute('aria-expanded','false'); document.body.classList.remove('locked'); }
+  burger.addEventListener('click', openMenu);
+  close.addEventListener('click', closeMenu);
+  menu.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', closeMenu); });
+  document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeMenu(); });
+
+  var form = document.getElementById('bookingForm');
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    var data = new FormData(form);
+    var text = 'Здравствуйте! Хочу забронировать стол в «' + (name || 'Тёплом хлебе') + '».'
+      + '\nИмя: ' + (data.get('name') || '')
+      + '\nТелефон: ' + (data.get('phone') || '')
+      + '\nДата: ' + (data.get('date') || '')
+      + '\nВремя: ' + (data.get('time') || '')
+      + '\nГостей: ' + (data.get('guests') || '');
+    window.open('https://wa.me/' + digits + '?text=' + encodeURIComponent(text), '_blank', 'noopener');
+  });
+})();
+</script>
+</body>
+</html>

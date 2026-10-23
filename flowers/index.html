@@ -1,0 +1,484 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Пион — цветы и букеты в Братске</title>
+<meta name="description" content="Свежие букеты в Братске: пионы, розы, сезонные цветы. Соберём за 30 минут, доставим в день заказа. Фото перед отправкой.">
+<meta property="og:title" content="Пион — цветы и букеты в Братске">
+<meta property="og:description" content="Соберём букет под ваш повод и привезём сегодня. Фото перед отправкой.">
+<meta property="og:image" content="../assets/img/flowers/hero.jpg">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%237A2E43'/%3E%3Ctext x='32' y='44' font-family='Georgia,serif' font-size='36' fill='%23FAF6F2' text-anchor='middle'%3EП%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="../assets/fonts/fonts.css">
+<style>
+  :root{
+    --porcelain:#FAF6F2;
+    --ink:#241B1E;
+    --muted:#6E6265;
+    --wine:#7A2E43;
+    --wine-dark:#622235;
+    --blush:#EAD0D4;
+    --sage:#7C8B72;
+    --line:#DED3CE;
+    --serif:'Cormorant Garamond',Georgia,serif;
+    --sans:'Manrope',system-ui,-apple-system,'Segoe UI',sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--porcelain);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+  body.locked{overflow:hidden}
+  img{display:block;max-width:100%}
+  a{color:inherit;text-decoration:none}
+  button{font:inherit;color:inherit}
+  .wrap{width:min(1200px,calc(100% - 48px));margin:0 auto}
+  [id]{scroll-margin-top:92px}
+  .demo-strip{background:var(--blush);color:var(--wine);text-align:center;font-size:11.5px;line-height:1.4;padding:8px 16px;letter-spacing:.02em}
+  .serif{font-family:var(--serif)}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:15px 24px;border:1px solid transparent;font-size:14px;font-weight:600;letter-spacing:.01em;cursor:pointer;border-radius:0;transition:background .2s,color .2s,border-color .2s}
+  .btn-primary{background:var(--wine);color:#fff}
+  .btn-primary:hover{background:var(--wine-dark)}
+  .btn-ghost{border-color:var(--ink);color:var(--ink)}
+  .btn-ghost:hover{background:var(--ink);color:var(--porcelain)}
+  .btn-light{background:var(--porcelain);color:var(--ink)}
+  .btn-light:hover{background:var(--blush)}
+
+  /* header */
+  .header{position:sticky;top:0;z-index:60;background:var(--porcelain);border-bottom:1px solid var(--line)}
+  .header-in{display:flex;align-items:center;gap:32px;height:78px}
+  .brand{display:flex;align-items:baseline;gap:12px;min-width:0}
+  .brand-name{font-family:var(--serif);font-size:31px;font-weight:600;letter-spacing:.06em;line-height:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .brand-sub{font-size:11px;color:var(--muted);letter-spacing:.08em;white-space:nowrap}
+  .nav{display:flex;gap:26px;margin-left:auto}
+  .nav a{font-size:13.5px;color:var(--ink);padding:4px 0;border-bottom:1px solid transparent}
+  .nav a:hover{border-color:var(--wine)}
+  .header-actions{display:flex;align-items:center;gap:18px;margin-left:8px}
+  .header-phone{font-size:14px;font-weight:600;white-space:nowrap}
+  .header-actions .btn{padding:12px 18px}
+  .burger{display:none;margin-left:auto;width:42px;height:42px;border:1px solid var(--line);background:transparent;position:relative;cursor:pointer}
+  .burger span{position:absolute;left:11px;right:11px;height:1.5px;background:var(--ink);transition:transform .25s,opacity .25s}
+  .burger span:nth-child(1){top:16px}
+  .burger span:nth-child(2){bottom:16px}
+
+  /* hero */
+  .hero{min-height:calc(100vh - 78px)}
+  .hero-grid{display:grid;grid-template-columns:1.02fr .98fr;min-height:calc(100vh - 78px)}
+  .hero-copy{display:flex;flex-direction:column;justify-content:center;padding:72px 48px 72px 0;max-width:600px}
+  .kicker{font-family:var(--serif);font-style:italic;font-size:20px;color:var(--wine)}
+  h1{font-family:var(--serif);font-weight:500;font-size:clamp(46px,6.1vw,84px);line-height:.98;letter-spacing:-.015em;margin:20px 0 26px}
+  .hero-copy p{max-width:440px;font-size:16.5px;color:var(--muted);margin:0}
+  .hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:34px}
+  .hero-meta{display:flex;align-items:center;gap:22px;margin-top:42px;font-size:13px;color:var(--muted)}
+  .hero-meta span+span{padding-left:22px;border-left:1px solid var(--line)}
+  .hero-visual{position:relative;padding:28px 0 28px 20px}
+  .hero-visual::before{content:"";position:absolute;right:0;bottom:0;width:74%;height:62%;background:var(--blush);z-index:0}
+  .hero-shot{position:relative;z-index:1;width:100%;height:100%;max-height:790px;object-fit:cover;object-position:50% 42%}
+  .hero-tag{position:absolute;z-index:2;left:46px;bottom:54px;background:var(--porcelain);border:1px solid var(--line);padding:16px 20px;max-width:250px}
+  .hero-tag small{display:block;font-size:11px;letter-spacing:.1em;color:var(--wine);margin-bottom:4px}
+  .hero-tag b{display:block;font-family:var(--serif);font-size:23px;font-weight:600;line-height:1.1}
+  .hero-tag span{display:block;font-size:13px;color:var(--muted);margin-top:6px}
+
+  /* sections */
+  .section{padding:96px 0}
+  .section-head{display:flex;align-items:flex-end;justify-content:space-between;gap:40px;border-bottom:1px solid var(--line);padding-bottom:22px;margin-bottom:42px}
+  .section-head h2{font-family:var(--serif);font-weight:500;font-size:clamp(36px,4.4vw,56px);line-height:1;margin:0}
+  .section-head p{max-width:360px;margin:0;font-size:14px;color:var(--muted)}
+
+  .catalog{display:grid;grid-template-columns:repeat(3,1fr);gap:44px 28px}
+  .card .shot{overflow:hidden;background:var(--blush);aspect-ratio:4/5}
+  .card img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease}
+  .card:hover img{transform:scale(1.03)}
+  .card h3{font-family:var(--serif);font-size:27px;font-weight:600;line-height:1.1;margin:16px 0 5px}
+  .card .comp{font-size:13px;color:var(--muted);min-height:38px;line-height:1.45}
+  .card .row{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-top:12px}
+  .price{font-size:15px;font-weight:700}
+  .order{font-size:12.5px;border-bottom:1px solid var(--ink);padding-bottom:2px;white-space:nowrap}
+  .order:hover{color:var(--wine);border-color:var(--wine)}
+
+  /* delivery */
+  .delivery{background:var(--wine);color:#fff;padding:58px 0}
+  .delivery-grid{display:grid;grid-template-columns:repeat(4,1fr)}
+  .delivery-item{padding:0 30px;border-left:1px solid rgba(255,255,255,.22)}
+  .delivery-item:first-child{padding-left:0;border-left:0}
+  .delivery-item:last-child{padding-right:0}
+  .delivery-item b{display:block;font-family:var(--serif);font-size:29px;font-weight:500;line-height:1.15;margin-bottom:7px}
+  .delivery-item span{display:block;font-size:13px;line-height:1.5;color:rgba(255,255,255,.76)}
+
+  /* reviews */
+  .reviews{display:grid;grid-template-columns:1.15fr .85fr;gap:70px;align-items:start}
+  .big-quote{font-family:var(--serif);font-size:clamp(29px,3.3vw,44px);line-height:1.22;font-weight:500;margin:0}
+  .big-quote footer{font-family:var(--sans);font-size:13px;color:var(--muted);margin-top:24px}
+  .review-list{display:flex;flex-direction:column;gap:22px}
+  .review{border-top:1px solid var(--line);padding-top:18px}
+  .review p{margin:0 0 8px;font-size:14px;color:var(--muted);line-height:1.55}
+  .review b{font-size:13px;font-weight:600}
+  .rating{display:flex;align-items:baseline;gap:10px;margin-bottom:26px}
+  .rating strong{font-family:var(--serif);font-size:38px;font-weight:600;line-height:1}
+  .rating span{font-size:12.5px;color:var(--muted)}
+
+  /* contacts */
+  .contacts{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:stretch}
+  .contact-list{display:grid;grid-template-columns:1fr 1fr;gap:28px 32px;margin:0}
+  .contact-list div{min-width:0}
+  .contact-list dt{font-size:11.5px;letter-spacing:.09em;color:var(--muted);margin-bottom:6px}
+  .contact-list dd{margin:0;font-size:15.5px;line-height:1.5}
+  .contact-list a{border-bottom:1px solid var(--line)}
+  .contact-list a:hover{border-color:var(--wine);color:var(--wine)}
+  .contact-note{margin-top:34px;padding-top:20px;border-top:1px solid var(--line);font-size:13px;color:var(--muted);max-width:420px}
+  .map{position:relative;min-height:360px;background:#EFE6DF;border:1px solid var(--line);overflow:hidden}
+  .map svg{position:absolute;inset:0;width:100%;height:100%}
+  .map-label{position:absolute;left:20px;bottom:20px;right:20px;display:flex;align-items:center;justify-content:space-between;gap:14px;background:var(--porcelain);border:1px solid var(--line);padding:13px 16px;font-size:12.5px}
+  .map-label a{font-weight:600;border-bottom:1px solid var(--ink);white-space:nowrap}
+
+  .footer{background:var(--ink);color:#F4ECE8;padding:54px 0 30px}
+  .footer-top{display:flex;justify-content:space-between;gap:40px;padding-bottom:34px;border-bottom:1px solid rgba(255,255,255,.14)}
+  .footer .brand-name{font-size:34px}
+  .footer .brand-sub{color:rgba(255,255,255,.55)}
+  .footer-cols{display:flex;gap:64px;font-size:13px}
+  .footer-cols div{color:rgba(255,255,255,.62);line-height:1.8}
+  .footer-cols b{display:block;color:#fff;font-weight:600;margin-bottom:6px}
+  .footer-bottom{display:flex;justify-content:space-between;gap:24px;padding-top:22px;font-size:11.5px;color:rgba(255,255,255,.45)}
+  .footer-bottom a{border-bottom:1px solid rgba(255,255,255,.3)}
+
+  .mobile-bar{display:none}
+
+  /* mobile menu */
+  .mobile-menu{position:fixed;inset:0;z-index:100;background:var(--porcelain);padding:24px;display:none;flex-direction:column}
+  .mobile-menu.open{display:flex}
+  .mobile-menu-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:40px}
+  .mobile-menu nav{display:flex;flex-direction:column;gap:6px}
+  .mobile-menu nav a{font-family:var(--serif);font-size:40px;line-height:1.25;border-bottom:1px solid var(--line);padding:10px 0}
+  .mobile-menu .close{width:44px;height:44px;border:1px solid var(--line);background:transparent;font-size:26px;line-height:1;cursor:pointer}
+  .mobile-menu-foot{margin-top:auto;display:flex;flex-direction:column;gap:10px;font-size:14px;color:var(--muted)}
+  .mobile-menu-foot a{color:var(--ink);font-weight:600}
+
+  @media (max-width:1040px){
+    .nav{display:none}
+    .header-actions{margin-left:auto}
+    .burger{display:block}
+    .hero{min-height:0}
+    .hero-grid{grid-template-columns:1fr}
+    .hero-copy{padding:56px 0 40px;max-width:none}
+    .hero-copy p{max-width:560px}
+    .hero-visual{padding:0 0 44px;height:520px}
+    .hero-visual::before{width:64%;height:52%}
+    .hero-shot{max-height:520px}
+    .hero-tag{left:24px;bottom:20px}
+    .section{padding:76px 0}
+    .catalog{grid-template-columns:repeat(2,1fr)}
+    .delivery-grid{grid-template-columns:repeat(2,1fr);gap:30px 0}
+    .delivery-item:nth-child(3){padding-left:0;border-left:0}
+    .reviews{grid-template-columns:1fr;gap:44px}
+    .contacts{grid-template-columns:1fr;gap:40px}
+    .map{min-height:320px}
+  }
+  @media (max-width:720px){
+    .wrap{width:calc(100% - 32px)}
+    .header-in{height:66px;gap:12px}
+    .brand-name{font-size:26px;max-width:46vw}
+    .brand-sub{display:none}
+    .header-actions .header-phone{display:none}
+    .header-actions .btn{display:none}
+    .header-actions{margin-left:auto}
+    .burger{margin-left:auto}
+    .hero-copy{padding:38px 0 34px}
+    .kicker{font-size:18px}
+    h1{font-size:clamp(42px,11vw,60px);margin:14px 0 20px}
+    .hero-copy p{font-size:15.5px}
+    .hero-actions .btn{flex:1 1 auto}
+    .hero-meta{flex-direction:column;align-items:flex-start;gap:6px;margin-top:30px}
+    .hero-meta span+span{padding-left:0;border-left:0}
+    .hero-visual{height:430px;padding-bottom:34px}
+    .hero-visual::before{width:70%;height:48%}
+    .hero-shot{max-height:430px}
+    .hero-tag{left:16px;bottom:12px;padding:12px 15px;max-width:210px}
+    .hero-tag b{font-size:20px}
+    .section{padding:58px 0}
+    .section-head{flex-direction:column;align-items:flex-start;gap:12px;margin-bottom:28px;padding-bottom:16px}
+    .section-head h2{font-size:38px}
+    .section-head p{font-size:13px}
+    .catalog{grid-template-columns:repeat(2,1fr);gap:30px 14px}
+    .card h3{font-size:21px;margin-top:11px}
+    .card .comp{font-size:12px;min-height:52px}
+    .card .row{flex-direction:column;align-items:flex-start;gap:4px;margin-top:8px}
+    .price{font-size:14px}
+    .order{font-size:11.5px}
+    .delivery{padding:40px 0}
+    .delivery-grid{grid-template-columns:1fr 1fr;gap:26px 0}
+    .delivery-item{padding:0 16px}
+    .delivery-item b{font-size:23px}
+    .delivery-item span{font-size:12px}
+    .reviews{gap:36px}
+    .contacts{gap:32px}
+    .contact-list{grid-template-columns:1fr 1fr;gap:22px 18px}
+    .contact-list dd{font-size:14px}
+    .map{min-height:280px}
+    .footer{padding:40px 0 90px}
+    .footer-top{flex-direction:column;gap:26px}
+    .footer-cols{flex-wrap:wrap;gap:28px}
+    .footer-bottom{flex-direction:column;gap:8px}
+    [id]{scroll-margin-top:80px}
+    .mobile-bar{display:grid;grid-template-columns:1fr 1fr;position:fixed;left:0;right:0;bottom:0;z-index:80;border-top:1px solid var(--line);background:var(--porcelain)}
+    .mobile-bar a{display:flex;align-items:center;justify-content:center;height:58px;font-size:14px;font-weight:600}
+    .mobile-bar a:first-child{background:var(--wine);color:#fff}
+    .mobile-bar a:last-child{border-left:1px solid var(--line)}
+  }
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    .card img{transition:none}
+  }
+  :focus-visible{outline:2px solid var(--wine);outline-offset:3px}
+</style>
+</head>
+<body>
+
+<div class="demo-strip">Демо-версия сайта. Это пример оформления, а не действующий магазин.</div>
+
+<header class="header">
+  <div class="wrap header-in">
+    <a class="brand" href="#top" aria-label="На главную">
+      <span class="brand-name" data-brand>Пион</span>
+      <span class="brand-sub">цветы и букеты · Братск</span>
+    </a>
+    <nav class="nav" aria-label="Основная навигация">
+      <a href="#catalog">Каталог</a>
+      <a href="#delivery">Доставка</a>
+      <a href="#reviews">Отзывы</a>
+      <a href="#contacts">Контакты</a>
+    </nav>
+    <div class="header-actions">
+      <a class="header-phone" href="tel:+73953000000" data-phone>+7 (3953) 00-00-00</a>
+      <a class="btn btn-primary" href="https://wa.me/73953000000" data-wa="Здравствуйте! Хочу заказать букет." target="_blank" rel="noopener">Заказать</a>
+      <button class="burger" id="burger" aria-label="Открыть меню" aria-expanded="false"><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <div class="kicker">Братск, доставка в день заказа</div>
+        <h1>Букет к вечеру, собранный под ваш повод</h1>
+        <p>Пионы, розы и сезонные цветы. Собираем за 30 минут, привозим по городу. Сфотографируем готовый букет перед отправкой.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#catalog">Выбрать букет</a>
+          <a class="btn btn-ghost" href="tel:+73953000000" data-phone-link>Позвонить</a>
+        </div>
+        <div class="hero-meta">
+          <span>ул. Кирова, 15</span>
+          <span>ежедневно, 9:00–20:00</span>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <img class="hero-shot" src="../assets/img/flowers/hero.jpg" alt="Букет розовых пионов в стеклянной вазе" width="1200" height="1600">
+        <div class="hero-tag">
+          <small>Букет дня</small>
+          <b>«Розовый рассвет»</b>
+          <span>Пионы, эвкалипт · 2 490 ₽</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="catalog">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Каталог</h2>
+        <p>Цены за букет. Если нужен другой размер или состав — соберём под задачу, скажите бюджет.</p>
+      </div>
+      <div class="catalog">
+        <article class="card">
+          <div class="shot"><img src="../assets/img/flowers/peonies-pink.jpg" alt="Букет розовых пионов" loading="lazy" width="1200" height="1500"></div>
+          <h3>Тихий сад</h3>
+          <div class="comp">Пионы, эвкалипт, гипсофила</div>
+          <div class="row"><span class="price">3 900 ₽</span><a class="order" href="https://wa.me/73953000000" data-wa="Здравствуйте! Хочу заказать букет «Тихий сад»." target="_blank" rel="noopener">Заказать</a></div>
+        </article>
+        <article class="card">
+          <div class="shot"><img src="../assets/img/flowers/roses-red.jpg" alt="Букет красных роз" loading="lazy" width="1200" height="800"></div>
+          <h3>Красный вечер</h3>
+          <div class="comp">25 красных роз, рускус</div>
+          <div class="row"><span class="price">4 600 ₽</span><a class="order" href="https://wa.me/73953000000" data-wa="Здравствуйте! Хочу заказать букет «Красный вечер»." target="_blank" rel="noopener">Заказать</a></div>
+        </article>
+        <article class="card">
+          <div class="shot"><img src="../assets/img/flowers/roses-orange.jpg" alt="Букет оранжевых роз" loading="lazy" width="1200" height="900"></div>
+          <h3>Медный свет</h3>
+          <div class="comp">Кустовые розы, фисташка</div>
+          <div class="row"><span class="price">3 200 ₽</span><a class="order" href="https://wa.me/73953000000" data-wa="Здравствуйте! Хочу заказать букет «Медный свет»." target="_blank" rel="noopener">Заказать</a></div>
+        </article>
+        <article class="card">
+          <div class="shot"><img src="../assets/img/flowers/studio.jpg" alt="Букет розовых пионов" loading="lazy" width="1200" height="1700"></div>
+          <h3>Пудровый сад</h3>
+          <div class="comp">Пионы, ранункулюсы, зелень</div>
+          <div class="row"><span class="price">3 500 ₽</span><a class="order" href="https://wa.me/73953000000" data-wa="Здравствуйте! Хочу заказать букет «Пудровый сад»." target="_blank" rel="noopener">Заказать</a></div>
+        </article>
+        <article class="card">
+          <div class="shot"><img src="../assets/img/flowers/peonies-white.jpg" alt="Букет белых и розовых пионов" loading="lazy" width="1200" height="1200"></div>
+          <h3>Белый полдень</h3>
+          <div class="comp">Белые пионы, гортензия</div>
+          <div class="row"><span class="price">4 200 ₽</span><a class="order" href="https://wa.me/73953000000" data-wa="Здравствуйте! Хочу заказать букет «Белый полдень»." target="_blank" rel="noopener">Заказать</a></div>
+        </article>
+        <article class="card">
+          <div class="shot"><img src="../assets/img/flowers/mix.jpg" alt="Сборный букет из роз и гвоздик" loading="lazy" width="666" height="1200"></div>
+          <h3>Сладкий микс</h3>
+          <div class="comp">Розы, гвоздика, сезонная зелень</div>
+          <div class="row"><span class="price">2 400 ₽</span><a class="order" href="https://wa.me/73953000000" data-wa="Здравствуйте! Хочу заказать букет «Сладкий микс»." target="_blank" rel="noopener">Заказать</a></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="delivery" id="delivery">
+    <div class="wrap delivery-grid">
+      <div class="delivery-item"><b>Доставим сегодня</b><span>Принимаем заказы до 17:00 и привозим по Братску в день заказа.</span></div>
+      <div class="delivery-item"><b>300 ₽ по городу</b><span>Бесплатно при заказе от 3 000 ₽. Падун и Правобережный — по договорённости.</span></div>
+      <div class="delivery-item"><b>Соберём за полчаса</b><span>Если букет из наличия. Авторская сборка — от часа.</span></div>
+      <div class="delivery-item"><b>Пришлём фото</b><span>Сфотографируем готовый букет и отправим в WhatsApp перед доставкой.</span></div>
+    </div>
+  </section>
+
+  <section class="section" id="reviews">
+    <div class="wrap reviews">
+      <div>
+        <div class="rating"><strong>4,9</strong><span>из 5, 214 отзывов в 2ГИС</span></div>
+        <blockquote class="big-quote">
+          «Цветы должны пахнуть, а не выглядеть как с витрины. Поэтому собираем из того, что привезли утром.»
+          <footer>Флорист, стаж 9 лет</footer>
+        </blockquote>
+      </div>
+      <div class="review-list">
+        <div class="review">
+          <p>Заказывала маме на день рождения, привезли через два часа. Букет был даже лучше, чем на фото.</p>
+          <b>Анна, Центральный район</b>
+        </div>
+        <div class="review">
+          <p>Помогли собрать в последний момент и не взяли предоплату. Приятно, когда тебя слышат.</p>
+          <b>Дмитрий</b>
+        </div>
+        <div class="review">
+          <p>Брали цветы на свадьбу. Прислали фото до отправки, всё совпало.</p>
+          <b>Марина и Сергей</b>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="contacts" style="padding-top:0">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Контакты</h2>
+        <p>Заходите в салон или напишите в WhatsApp — поможем выбрать и посчитаем доставку.</p>
+      </div>
+      <div class="contacts">
+        <div>
+          <dl class="contact-list">
+            <div><dt>Адрес</dt><dd>Братск, ул. Кирова, 15<br>Центральный район</dd></div>
+            <div><dt>Часы</dt><dd>ежедневно<br>9:00–20:00</dd></div>
+            <div><dt>Телефон</dt><dd><a href="tel:+73953000000" data-phone>+7 (3953) 00-00-00</a></dd></div>
+            <div><dt>WhatsApp</dt><dd><a href="https://wa.me/73953000000" data-wa="Здравствуйте! Хочу заказать букет." target="_blank" rel="noopener">написать</a></dd></div>
+          </dl>
+          <p class="contact-note">Доставка по Братску — 300 ₽. От 3 000 ₽ бесплатно. На Падун и Правобережный рассчитываем отдельно.</p>
+        </div>
+        <div class="map" aria-label="Схема расположения салона">
+          <svg viewBox="0 0 600 440" role="img" aria-label="Улицы вокруг салона на Кирова, 15">
+            <rect width="600" height="440" fill="#EFE6DF"/>
+            <g stroke="#DCCDC5" stroke-width="2">
+              <path d="M0 90 H600"/><path d="M0 210 H600"/><path d="M0 330 H600"/>
+              <path d="M90 0 V440"/><path d="M240 0 V440"/><path d="M390 0 V440"/><path d="M520 0 V440"/>
+            </g>
+            <g stroke="#CBB8AF" stroke-width="7" fill="none">
+              <path d="M-20 260 C120 250 210 150 360 150 S560 120 640 140"/>
+              <path d="M150 -20 C170 100 260 180 300 260 S340 380 320 460"/>
+            </g>
+            <g fill="#D9CBC2">
+              <rect x="110" y="110" width="100" height="70"/><rect x="270" y="230" width="90" height="70"/>
+              <rect x="420" y="230" width="70" height="70"/><rect x="120" y="350" width="80" height="50"/>
+            </g>
+            <circle cx="300" cy="260" r="26" fill="rgba(122,46,67,.14)"/>
+            <circle cx="300" cy="260" r="9" fill="#7A2E43"/>
+            <circle cx="300" cy="260" r="3" fill="#FAF6F2"/>
+            <text x="316" y="252" font-family="Manrope,sans-serif" font-size="12" fill="#241B1E">Кирова, 15</text>
+          </svg>
+          <div class="map-label"><span>Братск, ул. Кирова, 15</span><a href="https://yandex.ru/maps/?text=Братск%2C%20улица%20Кирова%2C%2015" target="_blank" rel="noopener">Открыть карту</a></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-top">
+      <a class="brand" href="#top"><span class="brand-name" data-brand>Пион</span><span class="brand-sub">цветы и букеты · Братск</span></a>
+      <div class="footer-cols">
+        <div><b>Салон</b>ул. Кирова, 15<br>9:00–20:00</div>
+        <div><b>Связь</b><a href="tel:+73953000000" data-phone>+7 (3953) 00-00-00</a><br><a href="https://wa.me/73953000000" data-wa="Здравствуйте! Хочу заказать букет." target="_blank" rel="noopener">WhatsApp</a></div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span data-year>2026</span> <span data-brand>Пион</span>. Демо-версия сайта.</span>
+      <span><a href="../credits.html">Фотографии</a></span>
+    </div>
+  </div>
+</footer>
+
+<div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+  <div class="mobile-menu-top">
+    <span class="brand-name" data-brand>Пион</span>
+    <button class="close" id="closeMenu" aria-label="Закрыть меню">×</button>
+  </div>
+  <nav>
+    <a href="#catalog">Каталог</a>
+    <a href="#delivery">Доставка</a>
+    <a href="#reviews">Отзывы</a>
+    <a href="#contacts">Контакты</a>
+  </nav>
+  <div class="mobile-menu-foot">
+    <span>ул. Кирова, 15 · 9:00–20:00</span>
+    <a href="tel:+73953000000" data-phone>+7 (3953) 00-00-00</a>
+    <a href="https://wa.me/73953000000" data-wa="Здравствуйте! Хочу заказать букет." target="_blank" rel="noopener">Написать в WhatsApp</a>
+  </div>
+</div>
+
+<div class="mobile-bar">
+  <a href="tel:+73953000000" data-phone-link>Позвонить</a>
+  <a href="https://wa.me/73953000000" data-wa="Здравствуйте! Хочу заказать букет." target="_blank" rel="noopener">WhatsApp</a>
+</div>
+
+<script>
+(function(){
+  var q = new URLSearchParams(location.search);
+  var name = q.get('name');
+  var phone = q.get('phone');
+  var address = q.get('address');
+
+  if(name){
+    document.querySelectorAll('[data-brand]').forEach(function(el){ el.textContent = name; });
+    document.title = name + ' — цветы и букеты в Братске';
+  }
+  if(address){
+    document.querySelectorAll('[data-address]').forEach(function(el){ el.textContent = address; });
+  }
+  if(phone){
+    var digits = phone.replace(/\D/g,'');
+    if(digits.length === 11 && digits[0] === '8') digits = '7' + digits.slice(1);
+    document.querySelectorAll('[data-phone]').forEach(function(el){ el.textContent = phone; });
+    document.querySelectorAll('a[href^="tel:"]').forEach(function(el){ el.href = 'tel:+' + digits; });
+    document.querySelectorAll('a[data-wa]').forEach(function(el){
+      el.href = 'https://wa.me/' + digits + '?text=' + encodeURIComponent(el.getAttribute('data-wa'));
+    });
+  }
+  document.querySelectorAll('[data-year]').forEach(function(el){ el.textContent = new Date().getFullYear(); });
+
+  var burger = document.getElementById('burger');
+  var menu = document.getElementById('mobileMenu');
+  var close = document.getElementById('closeMenu');
+  function openMenu(){ menu.classList.add('open'); menu.setAttribute('aria-hidden','false'); burger.setAttribute('aria-expanded','true'); document.body.classList.add('locked'); }
+  function closeMenu(){ menu.classList.remove('open'); menu.setAttribute('aria-hidden','true'); burger.setAttribute('aria-expanded','false'); document.body.classList.remove('locked'); }
+  burger.addEventListener('click', openMenu);
+  close.addEventListener('click', closeMenu);
+  menu.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', closeMenu); });
+  document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeMenu(); });
+})();
+</script>
+</body>
+</html>

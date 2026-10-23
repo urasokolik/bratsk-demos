@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Собрать ссылку на демо</title>
+<meta name="description" content="Генератор персональных ссылок на демо-сайты: подставьте название и телефон клиента.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23121814'/%3E%3Ctext x='32' y='44' font-family='Georgia,serif' font-size='34' fill='%23E9B44C' text-anchor='middle'%3EД%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="assets/fonts/fonts.css">
+<style>
+  :root{
+    --bg:#121814;
+    --panel:#1B241E;
+    --panel-2:#202B23;
+    --text:#F2EDE3;
+    --muted:#9AA69B;
+    --line:rgba(242,237,227,.14);
+    --accent:#E9B44C;
+    --serif:'Lora',Georgia,serif;
+    --sans:'Golos Text',system-ui,-apple-system,'Segoe UI',sans-serif;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--text);font-family:var(--sans);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+  img{display:block;max-width:100%}
+  a{color:inherit;text-decoration:none}
+  button,input,select,textarea{font:inherit;color:inherit}
+  .wrap{width:min(1120px,calc(100% - 48px));margin:0 auto}
+  .header{border-bottom:1px solid var(--line)}
+  .header-in{display:flex;align-items:center;justify-content:space-between;gap:20px;height:72px}
+  .back{font-size:13px;color:var(--muted);border-bottom:1px solid rgba(242,237,227,.22);padding-bottom:1px}
+  .back:hover{color:var(--text)}
+  .brand{font-family:var(--serif);font-size:20px;font-weight:600}
+  .main{padding:54px 0 80px}
+  .kicker{font-size:11px;color:var(--accent);letter-spacing:.09em;margin-bottom:14px}
+  h1{font-family:var(--serif);font-weight:500;font-size:clamp(36px,4.6vw,58px);line-height:1.05;margin:0 0 14px}
+  .lead{color:var(--muted);font-size:14.5px;max-width:600px;margin:0 0 38px}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:26px;align-items:start}
+  .panel{background:var(--panel);border:1px solid var(--line);padding:26px}
+  .panel h2{font-family:var(--serif);font-size:22px;font-weight:600;margin:0 0 18px}
+  .tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:22px}
+  .tab{padding:10px 8px;border:1px solid var(--line);background:transparent;font-size:12px;cursor:pointer;color:var(--muted);transition:all .2s}
+  .tab:hover{border-color:rgba(242,237,227,.35);color:var(--text)}
+  .tab.active{background:var(--accent);border-color:var(--accent);color:#121814;font-weight:600}
+  .field{display:flex;flex-direction:column;gap:6px;margin-bottom:15px}
+  .field label{font-size:11px;color:var(--muted)}
+  .field input{width:100%;background:var(--panel-2);border:1px solid var(--line);color:var(--text);padding:12px 13px;font-size:14px;border-radius:2px;outline:none}
+  .field input:focus{border-color:var(--accent)}
+  .hint{font-size:11px;color:rgba(242,237,227,.42);margin:-6px 0 16px;line-height:1.5}
+  .link-box{background:var(--panel-2);border:1px solid var(--line);padding:13px;font-size:12px;line-height:1.55;word-break:break-all;color:#D8DED6;min-height:70px}
+  .btn-row{display:flex;gap:8px;margin-top:12px}
+  .btn{display:inline-flex;align-items:center;justify-content:center;padding:12px 16px;border:1px solid transparent;font-size:12.5px;font-weight:600;border-radius:2px;cursor:pointer;transition:all .2s;text-align:center}
+  .btn-accent{background:var(--accent);color:#121814}
+  .btn-accent:hover{background:#f0c264}
+  .btn-line{border-color:var(--line);color:var(--text);background:transparent}
+  .btn-line:hover{border-color:var(--text)}
+  .btn-row .btn{flex:1}
+  .preview{border:1px solid var(--line);background:var(--panel)}
+  .preview-img{overflow:hidden;background:#0D120F;aspect-ratio:16/10}
+  .preview-img img{width:100%;height:100%;object-fit:cover}
+  .preview-body{padding:20px 22px 22px}
+  .preview-label{font-size:10px;color:var(--accent);letter-spacing:.08em;margin-bottom:7px}
+  .preview-name{font-family:var(--serif);font-size:26px;font-weight:600;line-height:1.2;margin:0 0 4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .preview-phone{font-size:13px;color:var(--muted)}
+  .preview-actions{display:flex;gap:8px;margin-top:18px}
+  .preview-actions .btn{flex:1}
+  .message{margin-top:22px}
+  .message h3{font-size:12px;font-weight:600;color:var(--muted);margin:0 0 8px}
+  .message textarea{width:100%;min-height:118px;resize:vertical;background:var(--panel-2);border:1px solid var(--line);color:var(--text);padding:12px 13px;font-size:12px;line-height:1.55;outline:none;border-radius:2px}
+  .message textarea:focus{border-color:var(--accent)}
+  .note{margin-top:16px;font-size:11px;color:rgba(242,237,227,.42);line-height:1.6}
+  .toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(20px);background:var(--accent);color:#121814;font-size:12.5px;font-weight:600;padding:10px 16px;border-radius:2px;opacity:0;pointer-events:none;transition:all .2s;z-index:50}
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+  @media (max-width:900px){
+    .grid{grid-template-columns:1fr}
+    .preview{order:2}
+  }
+  @media (max-width:640px){
+    .wrap{width:calc(100% - 32px)}
+    .main{padding:34px 0 56px}
+    .header-in{height:62px}
+    .brand{font-size:18px}
+    .panel{padding:18px}
+    .tabs{grid-template-columns:1fr;}
+    .btn-row{flex-direction:column}
+    .toast{bottom:14px;width:calc(100% - 32px);text-align:center}
+  }
+  :focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="wrap header-in">
+    <a class="back" href="./">← Все демо</a>
+    <span class="brand">Генератор ссылки</span>
+  </div>
+</header>
+
+<main class="wrap main">
+  <div class="kicker">Персональная ссылка</div>
+  <h1>Подставьте название и телефон</h1>
+  <p class="lead">Выберите шаблон, введите данные клиента — ссылка и сообщение обновятся сразу. На сайте появятся его название и номер, все кнопки будут вести на его телефон.</p>
+
+  <div class="grid">
+    <section class="panel">
+      <h2>Данные клиента</h2>
+      <div class="tabs" role="tablist" aria-label="Шаблон">
+        <button class="tab active" data-t="flowers" role="tab" aria-selected="true">Цветы</button>
+        <button class="tab" data-t="cafe" role="tab" aria-selected="false">Кофейня</button>
+        <button class="tab" data-t="hotel" role="tab" aria-selected="false">Гостевой дом</button>
+      </div>
+      <div class="field">
+        <label for="name">Название</label>
+        <input id="name" type="text" autocomplete="organization" placeholder="Пион">
+      </div>
+      <div class="field">
+        <label for="phone">Телефон</label>
+        <input id="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+7 (3953) 00-00-00">
+      </div>
+      <p class="hint">Если оставить поля пустыми, в ссылке будет демо-название и номер-заглушка. Лучше подставить реальные данные — так клиент сразу увидит свой номер.</p>
+
+      <div class="field" style="margin-bottom:0">
+        <label>Ссылка</label>
+        <div class="link-box" id="linkBox">—</div>
+      </div>
+      <div class="btn-row">
+        <button class="btn btn-accent" id="copyLink">Скопировать ссылку</button>
+        <a class="btn btn-line" id="openLink" href="#" target="_blank" rel="noopener">Открыть</a>
+      </div>
+
+      <div class="message">
+        <h3>Сообщение для WhatsApp</h3>
+        <textarea id="message" readonly></textarea>
+        <div class="btn-row">
+          <button class="btn btn-line" id="copyMessage">Скопировать сообщение</button>
+        </div>
+      </div>
+      <p class="note">Ссылка работает с телефона и компьютера. Ничего устанавливать не нужно. Демо-страницы публичные: не добавляйте туда персональные данные, которых нет в открытом профиле организации.</p>
+    </section>
+
+    <aside class="preview">
+      <div class="preview-img"><img id="previewImg" src="assets/img/flowers/hero.jpg" alt="Предпросмотр демо" width="1200" height="800"></div>
+      <div class="preview-body">
+        <div class="preview-label" id="previewLabel">Цветы</div>
+        <div class="preview-name" id="previewName">Пион</div>
+        <div class="preview-phone" id="previewPhone">+7 (3953) 00-00-00</div>
+        <div class="preview-actions">
+          <a class="btn btn-accent" id="previewOpen" href="flowers/" target="_blank" rel="noopener">Открыть демо</a>
+        </div>
+      </div>
+    </aside>
+  </div>
+</main>
+
+<div class="toast" id="toast">Скопировано</div>
+
+<script>
+(function(){
+  var templates = {
+    flowers:{path:'flowers/', label:'Цветы', name:'Пион', phone:'+7 (3953) 00-00-00', img:'assets/img/flowers/hero.jpg'},
+    cafe:{path:'cafe/', label:'Кофейня', name:'Тёплый хлеб', phone:'+7 (3953) 00-00-00', img:'assets/img/cafe/latte.jpg'},
+    hotel:{path:'hotel/', label:'Гостевой дом', name:'Таёжный берег', phone:'+7 (3953) 00-00-00', img:'assets/img/hotel/hero.jpg'}
+  };
+  var current = 'flowers';
+  var nameEl = document.getElementById('name');
+  var phoneEl = document.getElementById('phone');
+  var linkBox = document.getElementById('linkBox');
+  var openLink = document.getElementById('openLink');
+  var previewImg = document.getElementById('previewImg');
+  var previewLabel = document.getElementById('previewLabel');
+  var previewName = document.getElementById('previewName');
+  var previewPhone = document.getElementById('previewPhone');
+  var previewOpen = document.getElementById('previewOpen');
+  var message = document.getElementById('message');
+  var toast = document.getElementById('toast');
+
+  function baseUrl(){
+    return location.href.split('?')[0].split('#')[0].replace(/builder\.html$/,'');
+  }
+  function getLink(){
+    var t = templates[current];
+    var name = nameEl.value.trim();
+    var phone = phoneEl.value.trim();
+    var params = [];
+    if(name) params.push('name=' + encodeURIComponent(name));
+    if(phone) params.push('phone=' + encodeURIComponent(phone));
+    return baseUrl() + t.path + (params.length ? '?' + params.join('&') : '');
+  }
+  function getName(){ return nameEl.value.trim() || templates[current].name; }
+  function getPhone(){ return phoneEl.value.trim() || templates[current].phone; }
+
+  function render(){
+    var t = templates[current];
+    var link = getLink();
+    var name = getName();
+    var phone = getPhone();
+    linkBox.textContent = link;
+    openLink.href = link;
+    previewOpen.href = link;
+    previewImg.src = t.img;
+    previewLabel.textContent = t.label;
+    previewName.textContent = name;
+    previewPhone.textContent = phone;
+    nameEl.placeholder = t.name;
+    message.value = 'Здравствуйте! Посмотрел вашу карточку в 2ГИС. Сделал пример сайта для вашей организации: ' + name + '. Можно открыть с телефона:\n' + link + '\n\nЕсли понравится, доработаю под вас: фотографии, меню и цены, тексты. Займёт 5–7 дней.';
+  }
+
+  function showToast(text){
+    toast.textContent = text;
+    toast.classList.add('show');
+    clearTimeout(showToast._t);
+    showToast._t = setTimeout(function(){ toast.classList.remove('show'); }, 1600);
+  }
+  function copy(text, okText){
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(text).then(function(){ showToast(okText); }, function(){ fallbackCopy(text, okText); });
+    } else {
+      fallbackCopy(text, okText);
+    }
+  }
+  function fallbackCopy(text, okText){
+    var ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.position = 'fixed';
+    ta.style.opacity = '0';
+    document.body.appendChild(ta);
+    ta.select();
+    try { document.execCommand('copy'); showToast(okText); } catch(e) { showToast('Не удалось скопировать'); }
+    document.body.removeChild(ta);
+  }
+
+  document.querySelectorAll('.tab').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      current = btn.getAttribute('data-t');
+      document.querySelectorAll('.tab').forEach(function(b){
+        b.classList.toggle('active', b === btn);
+        b.setAttribute('aria-selected', b === btn ? 'true' : 'false');
+      });
+      render();
+    });
+  });
+  nameEl.addEventListener('input', render);
+  phoneEl.addEventListener('input', render);
+  document.getElementById('copyLink').addEventListener('click', function(){ copy(getLink(), 'Ссылка скопирована'); });
+  document.getElementById('copyMessage').addEventListener('click', function(){ copy(message.value, 'Сообщение скопировано'); });
+
+  var preset = new URLSearchParams(location.search).get('t');
+  if(preset && templates[preset]){
+    current = preset;
+    document.querySelectorAll('.tab').forEach(function(b){
+      var on = b.getAttribute('data-t') === preset;
+      b.classList.toggle('active', on);
+      b.setAttribute('aria-selected', on ? 'true' : 'false');
+    });
+  }
+  render();
+})();
+</script>
+</body>
+</html>
